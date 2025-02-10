@@ -99,3 +99,51 @@
     padding: 20px;
   }
 }
+.logo-container {
+  display: flex;
+  justify-content: space-between;  
+  align-items: center; 
+  padding: 20px;
+  background-color: white;  
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 50px; 
+  height: auto;
+  margin-right: 10px;
+}
+
+.app-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.other-features {
+  display: flex;
+  gap: 20px; 
+}
+
+.other-features h4 {
+  margin: 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+.other-features h4:hover {
+  background-color: lightgray;
+  color: white;
+}
+.swal-button {
+  margin-right: 180px;
+}
+
+ 
+

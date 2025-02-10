@@ -6,12 +6,12 @@ import { Form, Button, Container } from 'react-bootstrap';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import InfoPage from './InfoPage';
-
+import swal from 'sweetalert';
 const LoginPage = () => {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
-    // const isLogin = useSelector((state) => state.loginCred);
-    // const dispatch = useDispatch();
+    const [errUserName, setErrUserName] = useState(false);
+    const [errPassword, setErrPassword] = useState(false);
 
     const handleUserName = (evt) => {
         setUserName(evt.target.value);
@@ -23,12 +23,30 @@ const LoginPage = () => {
 
     const checkLogin = async () => {
 
+       if(!userName.trim().length && !password.trim().length) {
+        swal("Error","Username and Password are empty!","error");
+        return;
+       }
+       else if(!userName.trim().length) {
+        swal("Error","Username is empty!","error");
+        return;
+       }
+       else if(!password.trim().length) {
+        swal("Error","Username is empty!","error");
+        return;
+       }  
+
         const loginData ={ 
             userName:userName.trim(),
             password:password.trim()
         };
         const response = await axios.post('http://127.0.0.1:5000/check_user',loginData);
-        console.log(response.data);
+        if(response.data === "True") {
+            swal("Success","Login Successful!","success");
+        }
+        if(response.data === "False") {
+            swal("Error","Login Failed!","error");
+        }
         return response.data;
     };
 
@@ -40,7 +58,7 @@ const LoginPage = () => {
     return (
         <div className='Main-Page'>
             <div className='info-page'>
-                dududu
+            <InfoPage/>                
             </div>
             <div className='login-page'>
                 <Form className='form login-css'>
