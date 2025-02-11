@@ -12,27 +12,27 @@ def create_schema_and_tables():
         )
         cursor = connection.cursor()
         
-        # Create Schema
+        # Drop the old schema if it exists (CAUTION: This deletes all its tables!)
+        drop_old_schema_query = '''
+        DROP SCHEMA IF EXISTS user_management CASCADE;
+        '''
+        cursor.execute(drop_old_schema_query)
+        
+        # Create New Schema: flexboard
         create_schema_query = '''
-        CREATE SCHEMA IF NOT EXISTS user_management;
+        CREATE SCHEMA IF NOT EXISTS flexboard;
         '''
         cursor.execute(create_schema_query)
         
-        # Create Employees Table inside the schema
-        create_employees_table_query = '''
-        CREATE TABLE IF NOT EXISTS user_management.employees (
-            id SERIAL PRIMARY KEY,
-            name VARCHAR(100) NOT NULL,
-            age INT,
-            department VARCHAR(100),
-            date_joined DATE
-        );
+        # Drop employees table if it exists
+        drop_employees_table_query = '''
+        DROP TABLE IF EXISTS flexboard.employees;
         '''
-        cursor.execute(create_employees_table_query)
+        cursor.execute(drop_employees_table_query)
         
-        # Create Login Table inside the schema
+        # Create Login Table inside the new schema
         create_login_table_query = '''
-        CREATE TABLE IF NOT EXISTS user_management.login (
+        CREATE TABLE IF NOT EXISTS flexboard.login (
             id SERIAL PRIMARY KEY,
             username VARCHAR(100) NOT NULL,
             password VARCHAR(255) NOT NULL
@@ -43,8 +43,10 @@ def create_schema_and_tables():
         # Commit the changes
         connection.commit()
         
-        print("Schema and Tables created successfully.")
-        
+        print("Schema 'flexboard' created successfully.")
+        print("Table 'employees' deleted (if it existed).")
+        print("Table 'login' created successfully.")
+
     except Exception as error:
         print(f"Error occurred: {error}")
     
@@ -55,4 +57,5 @@ def create_schema_and_tables():
         if connection:
             connection.close()
 
-
+# Run the function
+create_schema_and_tables()
