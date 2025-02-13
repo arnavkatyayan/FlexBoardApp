@@ -144,6 +144,26 @@
 .swal-button {
   margin-right: 180px;
 }
-
+.pass-validations {
+  text-align: center;
+  font-weight: 400;
+  cursor: pointer;
+}
+.pass-validations:hover {
+  color: red;
+}
+.bg-color {
+  background-color: black;
+}
+.bg-color-labels {
+  color: white !important;
+}
+.switch {
+  margin-top: -9px;
+}
+.switch-icons {
+  height:22px;
+  background-color: white;
+}
  
 
