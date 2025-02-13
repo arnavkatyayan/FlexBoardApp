@@ -7,11 +7,14 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import InfoPage from './InfoPage';
 import swal from 'sweetalert';
+import view from './view.png';
+import hide from './hide.png';
 const LoginPage = () => {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [errUserName, setErrUserName] = useState(false);
     const [errPassword, setErrPassword] = useState(false);
+    const [passIcon, setPassIcon] = useState(false);
 
     const handleUserName = (evt) => {
         setUserName(evt.target.value);
@@ -55,6 +58,10 @@ const LoginPage = () => {
         setPassword("");
     }
 
+    const handlePassIcon = () => {
+        setPassIcon(!passIcon);
+    }
+
     return (
         <div className='Main-Page'>
             <div className='info-page'>
@@ -71,14 +78,15 @@ const LoginPage = () => {
                             style={{ width: '15vw' }}
                         />
                     </Form.Group>
-                    <Form.Group controlId="formPassword">
+                    <Form.Group controlId="formPassword" className='flex'>
                         <Form.Control
-                            type="password"
+                            type={!passIcon ? "password" :"text"}
                             placeholder="Please enter the password"
                             value={password}
                             onChange={handlePassword}
                             style={{ width: '15vw' }}
                         />
+                    {!passIcon ? <img src={hide} className='pass-icons' onClick={handlePassIcon} /> : <img src={view} className='pass-icons' onClick={handlePassIcon} />}
                     </Form.Group>
                     <div className='btn-grps'>
                         <Button variant="primary" onClick={checkLogin} className='btn'>

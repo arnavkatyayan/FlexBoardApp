@@ -148,6 +148,7 @@
   text-align: center;
   font-weight: 400;
   cursor: pointer;
+  margin-right:50px;
 }
 .pass-validations:hover {
   color: red;
@@ -167,6 +168,21 @@
 }
 .version-no {
   font-size: 12px;
+}
+.custom {
+  margin-right: 175px !important;
+}
+.btn-grps-signup {
+  margin-right: 54px;
+}
+.pass-icons {
+  height: 22px;
+  margin-left: -31px;
+  margin-top: 10px;
+  cursor:pointer;
+}
+.flex {
+  display: flex;
 }
  
 
