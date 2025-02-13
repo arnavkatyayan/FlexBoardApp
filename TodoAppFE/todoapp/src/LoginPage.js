@@ -88,6 +88,7 @@ const LoginPage = () => {
                             Reset
                         </Button>
                     </div>
+                    <p className='version-no'>Version : 1.0.0</p>
                 </Form>
 
             </div>
