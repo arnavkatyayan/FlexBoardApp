@@ -33,7 +33,9 @@ function App() {
             label={checked ? <img src={LightMode} className="switch-icons" /> : <img src={DarkMode} className="switch-icons" />}
           />
           <h4 className={`pricing ${checked ? 'bg-color-labels' : ''}`}>Pricing</h4>
+          <h4 className={`signup ${checked ? 'bg-color-labels' : ''}`}>Forget Password</h4>
           <h4 className={`signup ${checked ? 'bg-color-labels' : ''}`} onClick={handleSignup}>Signup</h4>
+          <h4 className={`pricing ${checked ? 'bg-color-labels' : ''}`}>About</h4>
 
         </div>
       </div>

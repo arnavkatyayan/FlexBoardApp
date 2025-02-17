@@ -13,10 +13,8 @@ def check_user(username, password):
     try:
         connection = psycopg2.connect(**DB_PARAMS)
         cursor = connection.cursor()
-        print(username)
-        print(password)
         # Query to check if the user exists
-        query = sql.SQL("SELECT * FROM user_management.login WHERE username = %s AND password = %s")
+        query = sql.SQL("SELECT * FROM flexboard.login WHERE username = %s AND password = %s")
         cursor.execute(query, (username, password))
         user = cursor.fetchone()
         print(user)
