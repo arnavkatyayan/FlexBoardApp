@@ -139,8 +139,7 @@
   font-size: 16px;
 }
 .other-features h4:hover {
-  background-color: lightgray;
-  color: white;
+  text-decoration: underline;
 }
 .swal-button {
   margin-right: 180px;
@@ -185,5 +184,47 @@
 .flex {
   display: flex;
 }
+.shrink-size {
+  width:22vw !important;
+  position: relative;
+}
+.top-alignment {
+  top:6px;
+  position: absolute;
+}
+.vertical-line {
+  width: 86%;
+  height: 2px;
+  background-color: gray;
+  top: 26px;
+  position: absolute;
+}
+.features-list {
+  list-style-type: none;
+  padding: 0;
+}
+.price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+.heading-margin-top {
+  margin-top: 40px;
+}
+.font-weight-props {
+  font-weight: 700;
+}
+.grid-arrangement {
+  display: grid;
+  grid-template-columns: repeat(1,1fr);
+  row-gap: 17px;
+  margin-top: 160px;
+}
+.pricing-btn {
+  bottom: 90px;
+  position: absolute;
+  width:12vw;
+}
+
  
 

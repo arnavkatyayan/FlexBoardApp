@@ -7,10 +7,12 @@ import { useState } from 'react';
 import { Switch, FormControlLabel } from "@mui/material";
 import LightMode from './light-mode.png';
 import DarkMode from './dark-mode.png';
+import Pricing from './Pricing';
 
 function App() {
   const [isSignupClicked, setIsSignUpClicked] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [isPricing, setIsPricing] = useState(false);
 
   const handleSignup = () => {
     setIsSignUpClicked(!isSignupClicked);
@@ -18,6 +20,10 @@ function App() {
 
   const handleSwitch = (event) => {
     setChecked(event.target.checked);
+  }
+
+  const handlePricing = () => {
+    setIsPricing(!isPricing);
   }
 
   return (
@@ -32,7 +38,7 @@ function App() {
             control={<Switch checked={checked} onChange={handleSwitch} />}
             label={checked ? <img src={LightMode} className="switch-icons" /> : <img src={DarkMode} className="switch-icons" />}
           />
-          <h4 className={`pricing ${checked ? 'bg-color-labels' : ''}`}>Pricing</h4>
+          <h4 className={`pricing ${checked ? 'bg-color-labels' : ''}`} onClick={handlePricing}>Pricing</h4>
           <h4 className={`signup ${checked ? 'bg-color-labels' : ''}`}>Forget Password</h4>
           <h4 className={`signup ${checked ? 'bg-color-labels' : ''}`} onClick={handleSignup}>Signup</h4>
           <h4 className={`pricing ${checked ? 'bg-color-labels' : ''}`}>About</h4>
@@ -40,7 +46,8 @@ function App() {
         </div>
       </div>
       {isSignupClicked && <SignupPage />}
-      {!isSignupClicked ?
+      {isPricing && <Pricing/>}
+      {!isSignupClicked && !isPricing ?
         <div className="App">
           <LoginPage />
         </div> : null}
