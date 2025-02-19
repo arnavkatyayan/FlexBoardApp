@@ -9,12 +9,14 @@ import InfoPage from './InfoPage';
 import swal from 'sweetalert';
 import view from './view.png';
 import hide from './hide.png';
+import Options from './Options';
 const LoginPage = () => {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [errUserName, setErrUserName] = useState(false);
     const [errPassword, setErrPassword] = useState(false);
     const [passIcon, setPassIcon] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleUserName = (evt) => {
         setUserName(evt.target.value);
@@ -45,7 +47,11 @@ const LoginPage = () => {
         };
         const response = await axios.post('http://127.0.0.1:5000/check_user',loginData);
         if(response.data === "True") {
-            swal("Success","Login Successful!","success");
+            swal("Success", "Login Successful!", "success").then((value) => {
+                if (value) {
+                    setIsLoggedIn(true);
+                }
+            });
         }
         if(response.data === "False") {
             swal("Error","Login Failed!","error");
@@ -60,6 +66,11 @@ const LoginPage = () => {
 
     const handlePassIcon = () => {
         setPassIcon(!passIcon);
+    }
+    if(isLoggedIn) {
+        return (
+            <Options/>
+        )
     }
 
     return (

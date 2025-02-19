@@ -13,7 +13,7 @@ def isUserExists():
     if username and password:
         isPresent = check_user(username,password)
         print(isPresent)
-        return bool(isPresent)
+        return str(isPresent)
     else:
         return False
 
