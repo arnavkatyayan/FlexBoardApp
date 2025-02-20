@@ -39,7 +39,11 @@ def create_schema_and_tables():
         );
         '''
         cursor.execute(create_login_table_query)
-        
+        create_login_mail_column = '''
+        ALTER TABLE flexboard.login
+        ADD COLUMN email VARCHAR(100) NOT NULL;
+        '''
+        cursor.execute(create_login_mail_column)
         # Commit the changes
         connection.commit()
         

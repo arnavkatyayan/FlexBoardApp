@@ -15,8 +15,14 @@ function SignupPage() {
     const [isPassValidationClicked, setIsPassValidationClicked] = useState(false);
     const [passIcon, setPassIcon] = useState(false);
     const [passIconConfirm, setPassIconConfirm] = useState(false);
+    const [email, setEmail] = useState("");
+    
     const handleUserName = (evt) => {
         setUserName(evt.target.value);
+    }
+
+    const handleEmail = (evt) => {
+        setEmail(evt.target.value);
     }
 
     const handlePassword = (evt) => {
@@ -32,8 +38,13 @@ function SignupPage() {
     }
 
     const handleSignup = async (evt) => {
-        if (checkUserAvailable()) {
+        if (await checkUserAvailable() == "True") {
             swal("Error", "User is already taken", "error");
+            return;
+        }
+        if (await checkEmailAvailable() == "True") {
+            console.log("Inside this");
+            swal("Error", "Email is already taken", "error");
             return;
         }
         if (password.trim() != confirmPassword.trim()) {
@@ -52,13 +63,14 @@ function SignupPage() {
             swal("Error", "username is empty", "error");
             return;
         }
-        if(!validatePassword()) {
-            swal("Error","Password is not strong check password validations","error");
+        if (!validatePassword()) {
+            swal("Error", "Password is not strong check password validations", "error");
             return;
         }
 
         const signupData = {
             userName: userName.trim(),
+            email: email.trim(),
             password: password.trim(),
         };
 
@@ -77,6 +89,16 @@ function SignupPage() {
         return response.data;
     }
 
+    const checkEmailAvailable = async () => {
+        const emailData = {
+            email: email.trim()
+        }
+        const response = await axios.post('http://127.0.0.1:5000/check_email_exists', emailData);
+        console.log(response.data)
+        console.log(typeof response.data)
+        return response.data;
+    }
+
     const handleReset = () => {
         setUserName("");
         setPassword("");
@@ -87,7 +109,7 @@ function SignupPage() {
         setIsPassValidationClicked(true);
     }
 
-    const handleClose = ()=> {
+    const handleClose = () => {
         setIsPassValidationClicked(false);
     }
 
@@ -119,26 +141,35 @@ function SignupPage() {
                             style={{ width: '15vw' }}
                         />
                     </Form.Group>
+                    <Form.Group controlId="formUsername">
+                        <Form.Control
+                            type="text"
+                            placeholder="E-mail"
+                            value={email}
+                            onChange={handleEmail}
+                            style={{ width: '15vw' }}
+                        />
+                    </Form.Group>
                     <Form.Group controlId="formPassword" className="flex">
                         <Form.Control
-                            type={!passIcon? "password":"text"}
+                            type={!passIcon ? "password" : "text"}
                             placeholder="Password"
                             value={password}
                             onChange={handlePassword}
                             style={{ width: '15vw' }}
                         />
-                                            {!passIcon ? <img src={hide} className='pass-icons' onClick={handlePassIcon} /> : <img src={view} className='pass-icons' onClick={handlePassIcon} />}
+                        {!passIcon ? <img src={hide} className='pass-icons' onClick={handlePassIcon} /> : <img src={view} className='pass-icons' onClick={handlePassIcon} />}
 
                     </Form.Group>
                     <Form.Group controlId="formUsername" className="flex">
                         <Form.Control
-                            type={!passIconConfirm? "password":"text"}
+                            type={!passIconConfirm ? "password" : "text"}
                             placeholder="Confirm Password"
                             value={confirmPassword}
                             onChange={handleConfirmPassword}
                             style={{ width: '15vw' }}
                         />
-                                            {!passIconConfirm ? <img src={hide} className='pass-icons' onClick={handlePassIconConfirm} /> : <img src={view} className='pass-icons' onClick={handlePassIconConfirm} />}
+                        {!passIconConfirm ? <img src={hide} className='pass-icons' onClick={handlePassIconConfirm} /> : <img src={view} className='pass-icons' onClick={handlePassIconConfirm} />}
 
                     </Form.Group>
                     <div className='btn-grps btn-grps-signup'>

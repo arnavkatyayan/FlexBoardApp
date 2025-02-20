@@ -16,7 +16,6 @@ def check_user_exists(username):
         query = sql.SQL("SELECT * FROM flexboard.login WHERE username = %s")
         cursor.execute(query, (username,))  # Fix: Tuple requires a comma
         user = cursor.fetchone()
-        print(user)
         return bool(user)  
     except Exception as e:
         print(f"Error occurred: {e}")
@@ -27,26 +26,33 @@ def check_user_exists(username):
         if connection:
             connection.close()
 
-import psycopg2
-from psycopg2 import sql
+def check_email_exists(email):
+    try:
+        connection = psycopg2.connect(**DB_PARAMS)
+        cursor = connection.cursor()
+        query=sql.SQL("Select * from flexboard.login where email=%s")
+        cursor.execute(query,(email,))
+        user = cursor.fetchone()
+        return bool(user)
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        return False
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
 
-DB_PARAMS = {
-    'dbname': 'ToDoApp',
-    'user': 'postgres',
-    'password': 'bohSVE1@',
-    'host': 'localhost',
-    'port': '5432'
-}
 
-def save_user_details(username, password):
+def save_user_details(username, email, password):
     connection = None
     cursor = None
     try:
         connection = psycopg2.connect(**DB_PARAMS)
         cursor = connection.cursor()
         
-        query = sql.SQL("INSERT INTO flexboard.login (username, password) VALUES (%s, %s)")
-        cursor.execute(query, (username, password))
+        query = sql.SQL("INSERT INTO flexboard.login (username, email, password) VALUES (%s, %s, %s)")
+        cursor.execute(query, (username, email, password))
         
        
         connection.commit()
