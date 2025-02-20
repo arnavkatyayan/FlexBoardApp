@@ -16,7 +16,7 @@ function SignupPage() {
     const [passIcon, setPassIcon] = useState(false);
     const [passIconConfirm, setPassIconConfirm] = useState(false);
     const [email, setEmail] = useState("");
-    
+
     const handleUserName = (evt) => {
         setUserName(evt.target.value);
     }
@@ -43,8 +43,11 @@ function SignupPage() {
             return;
         }
         if (await checkEmailAvailable() == "True") {
-            console.log("Inside this");
             swal("Error", "Email is already taken", "error");
+            return;
+        }
+        if(email.trim().length ===0) {
+            swal("Error", "email is empty", "error");
             return;
         }
         if (password.trim() != confirmPassword.trim()) {
@@ -103,6 +106,7 @@ function SignupPage() {
         setUserName("");
         setPassword("");
         setConfirmPassword("");
+        setEmail("");
     }
 
     const handlePasswordValidations = () => {
