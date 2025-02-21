@@ -44,6 +44,20 @@
   width: 100vw;  /* Ensures full viewport width */
   gap: 50px; /* Adds spacing between the two sections */
 }
+/* .About-page {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  column-gap: 50px;
+  row-gap:60px;
+  width: max-content; 
+  margin: auto; 
+  height: 100vh;
+  align-content: center; 
+}
+.about-size {
+  height: 50px !important;
+  width:75px !important;
+} */
 
 .info-page {
   background-color: bisque;
@@ -225,6 +239,21 @@
   position: absolute;
   width:12vw;
 }
+.forget-pass-size {
+  height: 12vh;
+}
+/* .about-text {
+  width: 100%;
+  max-width: 600px;
+  white-space: normal;
+  line-height: 1.5;
+  font-style: oblique;
+  font-weight: 500;
+  font-size: large;
+} */
+
+
+
 
  
 

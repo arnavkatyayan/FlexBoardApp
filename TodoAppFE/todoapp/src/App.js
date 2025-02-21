@@ -10,7 +10,7 @@ import DarkMode from './dark-mode.png';
 import Pricing from './Pricing';
 import About from './About';
 import ForgetPassword from './ForgetPassword';
-
+import axios from 'axios';
 function App() {
   const [isSignupClicked, setIsSignUpClicked] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -37,6 +37,14 @@ function App() {
     setForgetPass(true);
   }
 
+  const checkEmailAvailable = async (email) => {
+    const emailData = {
+        email: email.trim()
+    }
+    const response = await axios.post('http://127.0.0.1:5000/check_email_exists', emailData);
+    return response.data;
+}
+
   return (
     <div className={checked? 'bg-color':null}>
       <div className={`logo-container ${checked ? 'bg-color':null}`}>
@@ -56,10 +64,10 @@ function App() {
 
         </div>
       </div>
-      {isSignupClicked && <SignupPage />}
+      {isSignupClicked && <SignupPage checkEmailAvailable={checkEmailAvailable} />}
       {isPricing && <Pricing/>}
       {isAbountClicked && <About/>}
-      {forgetPass && <ForgetPassword/>}
+      {forgetPass && <ForgetPassword checkEmailAvailable={checkEmailAvailable}/>}
       {!isSignupClicked && !forgetPass && !isPricing && !isAbountClicked ?
         <div className="App">
           <LoginPage />

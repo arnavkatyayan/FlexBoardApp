@@ -7,7 +7,7 @@ import { Modal } from "react-bootstrap";
 import SignupValidationsPage from "./SignupValidationsPage";
 import view from './view.png';
 import hide from './hide.png';
-function SignupPage() {
+function SignupPage(props) {
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -42,7 +42,7 @@ function SignupPage() {
             swal("Error", "User is already taken", "error");
             return;
         }
-        if (await checkEmailAvailable() == "True") {
+        if (await props.checkEmailAvailable(email) == "True") {
             swal("Error", "Email is already taken", "error");
             return;
         }
@@ -92,15 +92,6 @@ function SignupPage() {
         return response.data;
     }
 
-    const checkEmailAvailable = async () => {
-        const emailData = {
-            email: email.trim()
-        }
-        const response = await axios.post('http://127.0.0.1:5000/check_email_exists', emailData);
-        console.log(response.data)
-        console.log(typeof response.data)
-        return response.data;
-    }
 
     const handleReset = () => {
         setUserName("");
