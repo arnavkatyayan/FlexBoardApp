@@ -11,6 +11,7 @@ import Pricing from './Pricing';
 import About from './About';
 import ForgetPassword from './ForgetPassword';
 import axios from 'axios';
+import TodoList from './TodoList';
 function App() {
   const [isSignupClicked, setIsSignUpClicked] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -57,7 +58,7 @@ function App() {
             control={<Switch checked={checked} onChange={handleSwitch} />}
             label={checked ? <img src={LightMode} className="switch-icons" /> : <img src={DarkMode} className="switch-icons" />}
           />
-          <h4 className={`pricing ${checked ? 'bg-color-labels' : ''}`} onClick={handlePricing}>Pricing</h4>
+          <h4 className={`pricing ${checked ? 'bg-color-labels' : ''}`} onClick={handlePricing}>Prices</h4>
           <h4 className={`signup ${checked ? 'bg-color-labels' : ''}`} onClick={handleForgetPassword}>Forget Password</h4>
           <h4 className={`signup ${checked ? 'bg-color-labels' : ''}`} onClick={handleSignup}>Signup</h4>
           <h4 className={`pricing ${checked ? 'bg-color-labels' : ''}`} onClick={handleAbout}>About</h4>

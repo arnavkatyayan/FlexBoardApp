@@ -44,20 +44,6 @@
   width: 100vw;  /* Ensures full viewport width */
   gap: 50px; /* Adds spacing between the two sections */
 }
-/* .About-page {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  column-gap: 50px;
-  row-gap:60px;
-  width: max-content; 
-  margin: auto; 
-  height: 100vh;
-  align-content: center; 
-}
-.about-size {
-  height: 50px !important;
-  width:75px !important;
-} */
 
 .info-page {
   background-color: bisque;
@@ -166,6 +152,7 @@
 }
 .pass-validations:hover {
   color: red;
+  text-decoration: underline;
 }
 .bg-color {
   background-color: black;
@@ -181,7 +168,9 @@
   background-color: white;
 }
 .version-no {
-  font-size: 12px;
+  font-size: 13px;
+  margin-left: -3vw;
+  font-weight: 800;
 }
 .custom {
   margin-right: 175px !important;
@@ -242,15 +231,116 @@
 .forget-pass-size {
   height: 12vh;
 }
-/* .about-text {
+.shrink-height {
+  height:43vh;
+}
+.todo-btn {
+  position: absolute;
+  right:39px;
+  height: 4vh;
+  margin-top: 3px;
+}
+.todo-footer-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:10px;
+  right: 250px !important;
+  position: relative;
+}
+.todo-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:10px;
+  
+}
+.todo-form-others {
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+}
+.todo-others {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.modal-body {
+  height:35vh;
+  overflow-y: auto;
+}
+.todo-textfield {
+  width:15vw !important;
+}
+
+.modal-body-signup {
+  height:17vh;
+}
+
+@keyframes aboutPageAnimation {
+  0% {
+    opacity:0;
+  }
+  50% {
+    opacity: 0.5;
+
+  }
+  75% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.about-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap:15px;
   width: 100%;
-  max-width: 600px;
-  white-space: normal;
+  margin-top: 68px;
+  animation: aboutPageAnimation 2s;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 800px; /* Adjust as needed */
+  text-align: left;
+}
+
+.about-text {
+  background: #f4f4f4;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 16px;
   line-height: 1.5;
-  font-style: oblique;
-  font-weight: 500;
-  font-size: large;
-} */
+  border: 1px solid black;
+  box-shadow: #f4f4f4;
+}
+
+/* Video should be centered below the grid */
+.video-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.demo-section {
+height: 19vh;
+width:25vw;
+border-radius: 8px;
+border: 1px solid black;
+margin-top: 5px;
+padding:9px;
+}
+.contact-demo-page {
+  text-align: center;
+}
+
 
 
 

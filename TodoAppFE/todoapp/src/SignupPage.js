@@ -180,7 +180,7 @@ function SignupPage(props) {
                         <Modal.Header closeButton>
                             <Modal.Title>Password Validations</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>
+                        <Modal.Body className="modal-body-signup">
                             <SignupValidationsPage />
                         </Modal.Body>
                         <Modal.Footer>

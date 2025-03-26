@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function TypeWriterEffect({ word, onComplete }) {
+function TypeWriterEffect({ word, onComplete, terminate, setIsVanishEnabled }) {
   const [displayedText, setDisplayedText] = useState("");
 
   useEffect(() => {
@@ -13,6 +13,10 @@ function TypeWriterEffect({ word, onComplete }) {
         index++;
       } else {
         clearInterval(interval);
+        if(terminate) {
+          setIsVanishEnabled(true);
+          return;
+        }
         setTimeout(() => {
           onComplete(); 
         }, 1000); 

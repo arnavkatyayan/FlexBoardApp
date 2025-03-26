@@ -16,8 +16,8 @@ function Options(props) {
         setIsProjectBtnClicked(true);
     }
 
-    if(isTodoBtnClicked) {
-        <TodoList/>
+    if (isTodoBtnClicked) {
+        return (<TodoList />)
     }
     return (
         <div className='Main-Page'>
