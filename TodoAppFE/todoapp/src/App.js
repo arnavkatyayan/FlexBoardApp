@@ -13,14 +13,11 @@ import ForgetPassword from './ForgetPassword';
 import axios from 'axios';
 import TodoList from './TodoList';
 function App() {
-  const [isSignupClicked, setIsSignUpClicked] = useState(false);
+ 
   const [checked, setChecked] = useState(false);
-  const [isPricing, setIsPricing] = useState(false);
-  const [isAbountClicked, setIsAboutClicked] = useState(false);
-  const [forgetPass, setForgetPass] = useState(false);
-
+  const [activePage, setActivePage] = useState("login");
   const handleSignup = () => {
-    setIsSignUpClicked(!isSignupClicked);
+    setActivePage("signup")
   }
 
   const handleSwitch = (event) => {
@@ -28,14 +25,14 @@ function App() {
   }
 
   const handlePricing = () => {
-    setIsPricing(!isPricing);
+    setActivePage("pricing")
   }
 
   const handleAbout = () => {
-    setIsAboutClicked(true);
+    setActivePage("about");
   }
   const handleForgetPassword = () => {
-    setForgetPass(true);
+    setActivePage("forget-password");
   }
 
   const checkEmailAvailable = async (email) => {
@@ -65,14 +62,11 @@ function App() {
 
         </div>
       </div>
-      {isSignupClicked && <SignupPage checkEmailAvailable={checkEmailAvailable} />}
-      {isPricing && <Pricing/>}
-      {isAbountClicked && <About/>}
-      {forgetPass && <ForgetPassword checkEmailAvailable={checkEmailAvailable}/>}
-      {!isSignupClicked && !forgetPass && !isPricing && !isAbountClicked ?
-        <div className="App">
-          <LoginPage />
-        </div> : null}
+      {activePage === 'login' && <LoginPage />}
+      {activePage === 'signup' && <SignupPage checkEmailAvailable={checkEmailAvailable} />}
+      {activePage === 'pricing' && <Pricing />}
+      {activePage === 'about' && <About />}
+      {activePage === 'forget-password' && <ForgetPassword checkEmailAvailable={checkEmailAvailable} />}
     </div>
   );
 }
