@@ -7,9 +7,7 @@ function About() {
     const videos = [
         "https://youtu.be/ptD0T-ZcF2M?si=eDHFitspfs5gFWhp", // Steve Jobs - The Rules for Success
         "https://youtu.be/UNQhuFL6CWg", // The 5 AM Club - Why Waking Up Early is Life-Changing
-        "https://youtu.be/ZsYwFvC2g0A", // The Science of Productivity by ASAPScience
         "https://youtu.be/2lAe1cqCOXo", // Why Do We Procrastinate? (Ted-Ed)
-        "https://youtu.be/bj8d2Ehb1N4", // How To Stop Wasting Time - James Clear (Atomic Habits)
         "https://youtu.be/V2PP3p4_4R8", // 10x Your Productivity (Deep Work by Cal Newport)
         "https://youtu.be/VSceuiPBpxY?si=vrkYX5WQ04jSRZIo" // The Psychology of Self-Discipline - Willpower & Habits
     ];
