@@ -55,10 +55,10 @@ function App() {
           <span className={`app-name cursor-pointer ${checked ? 'bg-color-labels' : ''}`} onClick={handleLoginOnLogoClick}>FlexBoard</span>
         </div>
         <div className="other-features">
-          <FormControlLabel className='switch'
+          {/* <FormControlLabel className='switch'
             control={<Switch checked={checked} onChange={handleSwitch} />}
             label={checked ? <img src={LightMode} className="switch-icons" /> : <img src={DarkMode} className="switch-icons" />}
-          />
+          /> */}
           <h4 className={`pricing ${checked ? 'bg-color-labels' : ''}`} onClick={handlePricing}>Prices</h4>
           <h4 className={`signup ${checked ? 'bg-color-labels' : ''}`} onClick={handleForgetPassword}>Forget Password</h4>
           <h4 className={`signup ${checked ? 'bg-color-labels' : ''}`} onClick={handleSignup}>Signup</h4>
