@@ -11,7 +11,7 @@ function About() {
         "https://youtu.be/2lAe1cqCOXo", // Why Do We Procrastinate? (Ted-Ed)
         "https://youtu.be/bj8d2Ehb1N4", // How To Stop Wasting Time - James Clear (Atomic Habits)
         "https://youtu.be/V2PP3p4_4R8", // 10x Your Productivity (Deep Work by Cal Newport)
-        "https://youtu.be/VSceuiPBpxY?si=vrkYX5WQ04jSRZIo"
+        "https://youtu.be/VSceuiPBpxY?si=vrkYX5WQ04jSRZIo" // The Psychology of Self-Discipline - Willpower & Habits
     ];
 
     useEffect(() => {
@@ -51,15 +51,16 @@ function About() {
                     playing={false}
                 />
             </div>
-            <div className="demo-section">
+            {/* <div className="demo-section">
                 <h6 className="contact-demo-page">📞 Contact for Demo!</h6>
                 <div className="contact-info">
                     <p>📧 Email: <a href="mailto:arnavkatyayan99@gmail.com">arnavkatyayan99@gmail.com</a></p>
                     <p>🔗 LinkedIn: <a href="https://www.linkedin.com/in/arnav-katyayan/" target="_blank" rel="noopener noreferrer">https://www.linkedin.com/in/arnav-katyayan/</a></p>
                     <p>📱 Phone: <a href="tel:+918851454409">+918851454409</a></p>
                 </div>
+            </div> */}
             </div>
-        </div>
+        
     );
 
 } export default About;
