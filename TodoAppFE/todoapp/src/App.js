@@ -43,12 +43,16 @@ function App() {
     return response.data;
 }
 
+  const handleLoginOnLogoClick = () => {
+    setActivePage("login");
+  }
+
   return (
     <div className={checked? 'bg-color':null}>
       <div className={`logo-container ${checked ? 'bg-color':null}`}>
         <div className="logo">
           <img src={Logo} className="icon" alt="App Logo" />
-          <span className={`app-name ${checked ? 'bg-color-labels' : ''}`}>FlexBoard</span>
+          <span className={`app-name cursor-pointer ${checked ? 'bg-color-labels' : ''}`} onClick={handleLoginOnLogoClick}>FlexBoard</span>
         </div>
         <div className="other-features">
           <FormControlLabel className='switch'
