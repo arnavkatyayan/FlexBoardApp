@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import LoginPage from './LoginPage';
 import Logo from './MainIcon.png';
 import { Button } from 'react-bootstrap';
@@ -12,10 +12,13 @@ import About from './About';
 import ForgetPassword from './ForgetPassword';
 import axios from 'axios';
 import TodoList from './TodoList';
+import Coins from './coin.png'
 function App() {
  
   const [checked, setChecked] = useState(false);
   const [activePage, setActivePage] = useState("login");
+  const [coins, setCoins] = useState(0);
+  const [isCoinDisplayed, setIsCoinDisplayed] = useState(false);
   const handleSignup = () => {
     setActivePage("signup")
   }
@@ -59,6 +62,7 @@ function App() {
             control={<Switch checked={checked} onChange={handleSwitch} />}
             label={checked ? <img src={LightMode} className="switch-icons" /> : <img src={DarkMode} className="switch-icons" />}
           /> */}
+          {isCoinDisplayed ? <img src={Coins} className='coins-css' /> : null} {isCoinDisplayed ? coins : null}
           <h4 className={`pricing ${checked ? 'bg-color-labels' : ''}`} onClick={handlePricing}>Prices</h4>
           <h4 className={`signup ${checked ? 'bg-color-labels' : ''}`} onClick={handleForgetPassword}>Forget Password</h4>
           <h4 className={`signup ${checked ? 'bg-color-labels' : ''}`} onClick={handleSignup}>Signup</h4>
@@ -66,7 +70,7 @@ function App() {
 
         </div>
       </div>
-      {activePage === 'login' && <LoginPage />}
+      {activePage === 'login' && <LoginPage coins={coins} setCoins={setCoins} setIsCoinDisplayed={setIsCoinDisplayed}/>}
       {activePage === 'signup' && <SignupPage checkEmailAvailable={checkEmailAvailable} />}
       {activePage === 'pricing' && <Pricing />}
       {activePage === 'about' && <About />}

@@ -344,6 +344,10 @@ padding:9px;
 .cursor-pointer {
   cursor: pointer;
 }
+.coins-css {
+  height: 29px;
+  margin-top: -3px;
+}
 
 
 

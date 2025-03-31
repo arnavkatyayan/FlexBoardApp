@@ -10,7 +10,7 @@ import swal from 'sweetalert';
 import view from './view.png';
 import hide from './hide.png';
 import Options from './Options';
-const LoginPage = () => {
+const LoginPage = (props) => {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [errUserName, setErrUserName] = useState(false);
@@ -67,9 +67,30 @@ const LoginPage = () => {
     const handlePassIcon = () => {
         setPassIcon(!passIcon);
     }
+
+    const getCoinsFromBE = async (user) => {
+        try {
+            const resp = await axios.get("http://127.0.0.1:5000/get_coins", {
+                params: { user },  // ✅ Correct way to pass user parameter
+            });
+    
+            if (resp.data && resp.data.coins !== undefined) {
+                props.setCoins(resp.data.coins);  // ✅ Access coins correctly
+                console.log("Coins received:", resp.data.coins);
+            } else {
+                console.error("Invalid response format:", resp.data);
+            }
+        } catch (error) {
+            console.error("Error fetching coins:", error);
+        }
+    };
+    
+
     if(isLoggedIn) {
+        props.setIsCoinDisplayed(true);
+        getCoinsFromBE(userName);
         return (
-            <Options/>
+            <Options coins={props.coins}/>
         )
     }
 

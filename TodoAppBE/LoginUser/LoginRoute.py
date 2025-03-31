@@ -2,6 +2,7 @@ from flask import Flask,jsonify,request,Blueprint
 from flask_cors import CORS
 #from LoginService import check_user
 from .LoginService import check_user
+from .LoginService import get_coins
 login_blueprint = Blueprint('login', __name__)
 
 @login_blueprint.route('/check_user', methods=['POST'])
@@ -16,5 +17,19 @@ def isUserExists():
         return str(isPresent)
     else:
         return False
+    
+@login_blueprint.route('/get_coins', methods=['GET'])
+def getCoins():
+    username = request.args.get('user')
+    
+    if not username:
+        return jsonify({"error": "Username parameter is missing"}), 400
+
+    coins = get_coins(username)  # Call function properly
+
+    if coins is False:
+        return jsonify({"error": "Could not retrieve coins"}), 500
+    
+    return jsonify({"coins": coins})  # Return JSON response
 
 

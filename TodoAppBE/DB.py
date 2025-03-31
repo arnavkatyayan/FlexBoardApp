@@ -41,9 +41,14 @@ def create_schema_and_tables():
         cursor.execute(create_login_table_query)
         create_login_mail_column = '''
         ALTER TABLE flexboard.login
-        ADD COLUMN email VARCHAR(100) NOT NULL;
+        ADD COLUMN IF NOT EXISTS email VARCHAR(100) NOT NULL;
         '''
         cursor.execute(create_login_mail_column)
+
+        create_login_coin_column = ''' ALTER TABLE flexboard.login
+        ADD COLUMN IF NOT EXISTS Coins INTEGER DEFAULT 0;
+        '''
+        cursor.execute(create_login_coin_column)
         # Commit the changes
         connection.commit()
         
