@@ -56,13 +56,15 @@ function App() {
         <div className="logo">
           <img src={Logo} className="icon" alt="App Logo" />
           <span className={`app-name cursor-pointer ${checked ? 'bg-color-labels' : ''}`} onClick={handleLoginOnLogoClick}>FlexBoard</span>
+          <div className='coins-flex'>
+          {isCoinDisplayed ? <img src={Coins} className='coins-css' /> : null} {isCoinDisplayed ? <span className='coin-number'>{coins}</span> : null}
+          </div>
         </div>
         <div className="other-features">
           {/* <FormControlLabel className='switch'
             control={<Switch checked={checked} onChange={handleSwitch} />}
             label={checked ? <img src={LightMode} className="switch-icons" /> : <img src={DarkMode} className="switch-icons" />}
           /> */}
-          {isCoinDisplayed ? <img src={Coins} className='coins-css' /> : null} {isCoinDisplayed ? coins : null}
           <h4 className={`pricing ${checked ? 'bg-color-labels' : ''}`} onClick={handlePricing}>Prices</h4>
           <h4 className={`signup ${checked ? 'bg-color-labels' : ''}`} onClick={handleForgetPassword}>Forget Password</h4>
           <h4 className={`signup ${checked ? 'bg-color-labels' : ''}`} onClick={handleSignup}>Signup</h4>
