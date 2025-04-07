@@ -13,13 +13,14 @@ import ForgetPassword from './ForgetPassword';
 import axios from 'axios';
 import TodoList from './TodoList';
 import Coins from './coin.png';
+import ChangePassword from './ChangePassword';
 
 function App() {
   const [checked, setChecked] = useState(false);
   const [activePage, setActivePage] = useState("login");
   const [coins, setCoins] = useState(0);
   const [isCoinDisplayed, setIsCoinDisplayed] = useState(false);
-
+  const [user, setUser] = useState("");
   const handleSignup = () => {
     setActivePage("signup");
   };
@@ -67,6 +68,7 @@ function App() {
           <img src={Logo} className="icon" alt="App Logo" />
           <span className={`app-name cursor-pointer ${checked ? 'bg-color-labels' : ''}`} onClick={handleLoginOnLogoClick}>FlexBoard</span>
           <div className='coins-flex'>
+            {isCoinDisplayed? <h5 className='username-app-css'>Hi, {user}</h5>:null}
             {isCoinDisplayed ? <img src={Coins} className='coins-css' /> : null}
             {isCoinDisplayed ? <span className='coin-number'>{coins}</span> : null}
           </div>
@@ -87,6 +89,7 @@ function App() {
       {activePage === 'pricing' && <Pricing />}
       {activePage === 'about' && <About />}
       {activePage === 'forget-password' && <ForgetPassword checkEmailAvailable={checkEmailAvailable} />}
+      {activePage === 'change-password' && <ChangePassword user={user}/>}
     </div>
   );
 }
