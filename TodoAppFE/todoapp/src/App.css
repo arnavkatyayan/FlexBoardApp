@@ -350,7 +350,7 @@ padding:9px;
 }
 .coins-flex {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   margin-left: 8px;
   margin-top:8px;
 }
@@ -359,6 +359,20 @@ padding:9px;
 }
 .username-app-css {
   font-weight: 800;
+}
+.border-app-name {
+  padding: 6px 12px;
+  border: 2px solid black;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  background-color: lightgreen;
+}
+
+.border-app-name:hover {
+  background-color: lightgreen;
+  color: white;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  cursor: pointer;
 }
 
 

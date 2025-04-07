@@ -65,8 +65,14 @@ function App() {
     <div className={checked ? 'bg-color' : null}>
       <div className={`logo-container ${checked ? 'bg-color' : null}`}>
         <div className="logo">
-          <img src={Logo} className="icon" alt="App Logo" />
-          <span className={`app-name cursor-pointer ${checked ? 'bg-color-labels' : ''}`} onClick={handleLoginOnLogoClick}>FlexBoard</span>
+        
+          <div
+            className={`app-brand border-app-name cursor-pointer ${checked ? 'bg-color-labels' : ''}`}
+            onClick={handleLoginOnLogoClick}
+          >
+            <img src={Logo} className="icon" alt="App Logo" />
+            <span className="app-name">FlexBoard</span>
+          </div>
           <div className='coins-flex'>
             {isCoinDisplayed? <h5 className='username-app-css'>Hi, {user}</h5>:null}
             {isCoinDisplayed ? <img src={Coins} className='coins-css' /> : null}
