@@ -71,11 +71,11 @@ const LoginPage = (props) => {
     const getCoinsFromBE = async (user) => {
         try {
             const resp = await axios.get("http://127.0.0.1:5000/get_coins", {
-                params: { user },  // ✅ Correct way to pass user parameter
+                params: { user }, 
             });
     
             if (resp.data && resp.data.coins !== undefined) {
-                props.setCoins(resp.data.coins);  // ✅ Access coins correctly
+                props.setCoins(resp.data.coins);
                 console.log("Coins received:", resp.data.coins);
             } else {
                 console.error("Invalid response format:", resp.data);
@@ -88,9 +88,10 @@ const LoginPage = (props) => {
 
     if(isLoggedIn) {
         props.setIsCoinDisplayed(true);
+        props.setUser(userName);
         getCoinsFromBE(userName);
         return (
-            <Options coins={props.coins}/>
+            <Options coins={props.coins} userName={userName}/>
         )
     }
 

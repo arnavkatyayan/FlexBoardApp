@@ -38,6 +38,15 @@ def create_schema_and_tables():
             password VARCHAR(255) NOT NULL
         );
         '''
+        create_todo_table_query = '''
+        Create table if not exists flexboard.todo (
+        id serial primary key,
+        username varchar(100) NOT NULL,
+        todo varchar(1000) NOT NULL,
+        todo_date TIMESTAMP NOT NULL
+        );
+        '''
+        cursor.execute(create_todo_table_query)
         cursor.execute(create_login_table_query)
         create_login_mail_column = '''
         ALTER TABLE flexboard.login

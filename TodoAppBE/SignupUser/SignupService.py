@@ -12,13 +12,15 @@ DB_PARAMS = {
 }
 
 def check_user_exists(username):
+    connection = None
+    cursor = None
     try:
         connection = psycopg2.connect(**DB_PARAMS)
         cursor = connection.cursor()
         query = sql.SQL("SELECT * FROM flexboard.login WHERE username = %s")
-        cursor.execute(query, (username,))  # Fix: Tuple requires a comma
+        cursor.execute(query, (username,))
         user = cursor.fetchone()
-        return bool(user)  
+        return bool(user)
     except Exception as e:
         print(f"Error occurred: {e}")
         return False
@@ -29,6 +31,8 @@ def check_user_exists(username):
             connection.close()
 
 def check_email_exists(email):
+    connection = None
+    cursor = None
     try:
         connection = psycopg2.connect(**DB_PARAMS)
         cursor = connection.cursor()
@@ -51,12 +55,9 @@ def save_user_details(username, email, password):
     try:
         connection = psycopg2.connect(**DB_PARAMS)
         cursor = connection.cursor()
-        
         query = sql.SQL("INSERT INTO flexboard.login (username, email, password) VALUES (%s, %s, %s)")
         cursor.execute(query, (username, email, password))
-        
         connection.commit()
-
         return True
     except Exception as e:
         print(f"Error occurred: {e}")
@@ -76,32 +77,78 @@ def send_confirmation_email(app, username, email):
         mail = app.extensions.get('mail')
         mail.send(msg)
 
+def change_password(username, password):
+    connection = None
+    cursor = None
+    try:
+        connection = psycopg2.connect(**DB_PARAMS)
+        cursor = connection.cursor()
+        query = sql.SQL("UPDATE flexboard.login SET password = %s WHERE username = %s")
+        cursor.execute(query, (password, username))
+        connection.commit()
+        return True
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        return False
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+def check_password(username,password):
+    connection = None
+    cursor = None
+    try:
+        connection = psycopg2.connect(**DB_PARAMS)
+        cursor = connection.cursor()
+        query = sql.SQL("Select * from flexboard.login where username =%s")
+        cursor.execute(query, (username,))
+        user = cursor.fetchone()
+        if user and user[1]== username and user[2] == password:
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        return False
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+    
 def send_forgetpass_mail(app, email):
     with app.app_context():
+        new_password = gen_pass()
         msg = Message('Password Reset', 
                       sender=app.config['MAIL_USERNAME'], 
                       recipients=[email])
-        msg.body = f"Hello,\n\nYou requested a password reset. Your new password is {gen_pass()}."
+        msg.body = f"Hello,\n\nYou requested a password reset. Your new password is: {new_password}"
         mail = app.extensions.get('mail')
         mail.send(msg)
         return True
 
 def gen_random_no():
-    return random.randint(8,15)
+    return random.randint(8, 15)
 
 def gen_pass():
-    len = gen_random_no()
-    password = ""
-    lowerCaseChars = 'abcdefghijklmnopqrstuvwxyz'
-    upperCaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    numberChars = '0123456789'
-    specialChars = '!@#$%^&*()-_=+[]{}|;:,.<>?'
-    randomStr = lowerCaseChars+upperCaseChars+numberChars+specialChars
-    password = password+random.choice(lowerCaseChars)+random.choice(upperCaseChars)+random.choice(numberChars)+random.choice(specialChars)
-    for i in range(0,len-4):
-        password = password+random.choice(randomStr)
+    length = gen_random_no()
+    lower_case = 'abcdefghijklmnopqrstuvwxyz'
+    upper_case = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    numbers = '0123456789'
+    special = '!@#$%^&*()-_=+[]{}|;:,.<>?'
+    all_chars = lower_case + upper_case + numbers + special
+
+    # Ensure at least one character from each group
+    password = (
+        random.choice(lower_case) +
+        random.choice(upper_case) +
+        random.choice(numbers) +
+        random.choice(special)
+    )
+
+    # Fill remaining length
+    for _ in range(length - 4):
+        password += random.choice(all_chars)
 
     return password
-
-
-

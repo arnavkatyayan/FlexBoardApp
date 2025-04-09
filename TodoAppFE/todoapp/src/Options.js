@@ -17,7 +17,7 @@ function Options(props) {
     }
 
     if (isTodoBtnClicked) {
-        return (<TodoList />)
+        return (<TodoList userName={props.userName}/>)
     }
     return (
         <div className='Main-Page'>

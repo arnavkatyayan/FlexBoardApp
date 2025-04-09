@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_mail import Mail
 from LoginUser.LoginRoute import login_blueprint
+from TodoManagement.TodoRoute import todo_blueprint
 from SignupUser.SignupRoute import signup_blueprint
 
 app = Flask(__name__)
@@ -22,6 +23,6 @@ mail = Mail(app)
 # Register the blueprint
 app.register_blueprint(login_blueprint)
 app.register_blueprint(signup_blueprint)
-
+app.register_blueprint(todo_blueprint)
 if __name__ == '__main__':
     app.run(debug=True)

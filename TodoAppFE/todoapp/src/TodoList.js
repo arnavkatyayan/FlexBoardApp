@@ -42,7 +42,7 @@ function TodoList(props) {
 
                 </div>
                 <Button className="pricing-btn" onClick={handleAddTodo}>Add Todo</Button>
-               <AddTodo isAddTodoClicked={isAddTodoClicked} handleClose={handleClose}/>
+               <AddTodo isAddTodoClicked={isAddTodoClicked} handleClose={handleClose} userName={props.userName}/>
             </div>
             <div className="login-page shrink-size shrink-height">
                 <h4 className="top-alignment font-weight-props">Todo Storage</h4>
