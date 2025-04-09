@@ -126,6 +126,8 @@
 .app-name {
   font-size: 20px;
   font-weight: bold;
+  position: relative;
+  top:3px;
 }
 
 .other-features {
