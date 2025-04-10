@@ -5,11 +5,21 @@ import InfoPage from "./InfoPage";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 import AddTodo from "./AddTodo";
+import StoreTodo from "./StoreTodo";
 function TodoList(props) {
     const [isAddTodoClicked, setIsAddTodoClicked] = useState(false);
+    const [isStoreTodoClicked, setIsStoreTodoClicked] = useState(false);
 
     const handleClose = () => {
         setIsAddTodoClicked(false);
+    }
+
+    const handleCloseStore = () => {
+        setIsStoreTodoClicked(false);
+    }
+
+    const handleStoreTodo = () => {
+        setIsStoreTodoClicked(true);
     }
 
     const handleAddTodo = () => {
@@ -54,7 +64,8 @@ function TodoList(props) {
                     <h6>✅ Share with your friends </h6>
 
                 </div>
-                <Button className="pricing-btn">Store Todo</Button>
+                <Button className="pricing-btn" onClick={handleStoreTodo}>Store Todo</Button>
+                <StoreTodo isStoreTodoClicked={isStoreTodoClicked} handleCloseStore={handleCloseStore} userName={props.userName}/>
             </div>
         </div>
     )
