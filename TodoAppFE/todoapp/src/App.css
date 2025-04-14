@@ -384,7 +384,34 @@ padding:9px;
   position: relative;
   top: 95px;
 }
-
+.todo-icons {
+  height: 60px;
+  width:60px;
+  cursor: pointer;
+}
+.store-todo-comp {
+  display: flex;
+  flex-direction: column;
+  gap:6vw;
+  position: relative;
+  top: -67px;
+}
+.form-store-todo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.btns-grp-store-todo {
+  display: flex;
+  gap:10px;
+  position: relative;
+  top:12px;
+}
+#custom-check {
+  font-weight: 700;
+  cursor: pointer;
+}
 
 
 
