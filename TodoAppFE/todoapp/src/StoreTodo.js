@@ -7,6 +7,8 @@ function StoreTodo(props) {
     const [isEmailClicked, setIsEmailClicked] = useState(false);
     const [fileName, setFileName] = useState("");
     const [emailId, setEmailId] = useState("");
+    const [excelFileName, setExcelFileName] = useState("");
+    const [isExcelClicked, setIsExcelClicked] = useState(false);
 
     const handleEmailClicked = () => {
         setIsEmailClicked(true);
@@ -58,12 +60,52 @@ function StoreTodo(props) {
         setEmailId("");
     };
 
+    const handleExcelFileName = ()=> {
+        setIsExcelClicked(true);
+    }
+
     useEffect(() => {
         if (!isEmailClicked && fileName.trim().length > 0 && emailId.trim().length > 0) {
             handleReset();
         }
     }, [isEmailClicked]);
 
+    const handleResetExcel = () => {
+        setExcelFileName("");
+
+    }
+
+    const handleFileNameExcel = (event) => {
+        setExcelFileName(event.target.value);
+    }
+
+    const handleSaveExcel = async () => {
+        const storeTodoExcelRequestBody = {
+            excelFileName: excelFileName,
+            userName: props.userName
+        };
+        try {
+            const response = await axios.post(
+                "http://127.0.0.1:5000/saveExcelTodo",
+                storeTodoExcelRequestBody,
+                { responseType: "blob" } // 👈 this is important
+            );
+    
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", `${excelFileName}.xlsx`);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+    
+            swal("Success", "Excel file downloaded", "success");
+        } catch (error) {
+            console.error("Error:", error);
+            swal("Error", "Something went wrong!", "error");
+        }
+    };
+    
     return (
         <Modal show={props.isStoreTodoClicked} onHide={props.handleCloseStore}>
             <Modal.Header closeButton>
@@ -72,7 +114,7 @@ function StoreTodo(props) {
             <Modal.Body>
                 <div className="store-todo-comp">
                     <div className="store-todo-icons">
-                        <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Excel Icon" className="todo-icons" />
+                        <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Excel Icon" className="todo-icons" onClick={handleExcelFileName} />
                         <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Gmail Icon" className="todo-icons" onClick={handleEmailClicked} />
                     </div>
 
@@ -96,6 +138,23 @@ function StoreTodo(props) {
                                 <div className="btns-grp-store-todo mt-3">
                                     <Button onClick={handleSave}>Save</Button>
                                     <Button onClick={handleReset}>Reset</Button>
+                                </div>
+                            </Form>
+                        </div>
+                    )}
+                    {isExcelClicked && (
+                        <div className="form-store-todo">
+                            <Form>
+                                <Form.Label>Name of File</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Please enter the name"
+                                    value={excelFileName}
+                                    onChange={handleFileNameExcel}
+                                />
+                                <div className="btns-grp-store-todo mt-3">
+                                    <Button onClick={handleSaveExcel}>Save</Button>
+                                    <Button onClick={handleResetExcel}>Reset</Button>
                                 </div>
                             </Form>
                         </div>

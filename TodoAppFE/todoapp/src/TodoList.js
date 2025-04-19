@@ -27,8 +27,9 @@ function TodoList(props) {
     }
     return (
         <div className='Main-Page'>
-
-            <div className="login-page shrink-size shrink-height">
+            {/* Commenting this section will add in the next release currently adding todo and storing todo will be there. */}
+            
+            {/* <div className="login-page shrink-size shrink-height">
                 <h4 className="top-alignment font-weight-props">Todo Viewer</h4>
                 <hr className="vertical-line" />
                 <h5 className="top-alignment heading-margin-top">Keep collection of your Todo's</h5>
@@ -39,7 +40,7 @@ function TodoList(props) {
 
                 </div>
                 <Button className="pricing-btn">View Todo</Button>
-            </div>
+            </div> */}
 
             <div className="login-page shrink-size shrink-height ">
                 <h4 className="top-alignment font-weight-props">Todo Management</h4>
