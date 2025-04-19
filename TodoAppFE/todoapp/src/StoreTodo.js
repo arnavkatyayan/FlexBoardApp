@@ -121,7 +121,7 @@ function StoreTodo(props) {
                     {isEmailClicked && (
                         <div className="form-store-todo">
                             <Form>
-                                <Form.Label>Name of File</Form.Label>
+                                <Form.Label>Name of File for mail</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="Please enter the name"
@@ -145,7 +145,7 @@ function StoreTodo(props) {
                     {isExcelClicked && (
                         <div className="form-store-todo">
                             <Form>
-                                <Form.Label>Name of File</Form.Label>
+                                <Form.Label>Name of File for local saving</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="Please enter the name"
