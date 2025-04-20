@@ -74,6 +74,7 @@ function StartProject(props) {
                         type="date"
                         placeholder="Deadline"
                         style={{ width: '15vw' }}
+                        value={deadline}
                         onChange={handleDeadline}
                     />
                     
