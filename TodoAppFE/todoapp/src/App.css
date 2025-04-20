@@ -412,7 +412,9 @@ padding:9px;
   font-weight: 700;
   cursor: pointer;
 }
-
+.project-select {
+  width: 15vw !important;
+}
 
 
 

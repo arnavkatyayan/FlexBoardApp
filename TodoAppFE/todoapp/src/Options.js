@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import TodoList from "./TodoList";
+import Projects from "./Projects";
 
 function Options(props) {
        
@@ -17,7 +18,11 @@ function Options(props) {
     }
 
     if (isTodoBtnClicked) {
-        return (<TodoList userName={props.userName}/>)
+        return (<TodoList userName={props.userName}/>);
+    }
+
+    if(isProjectBtnClicked) {
+        return (<Projects userName={props.userName}/>);
     }
     return (
         <div className='Main-Page'>

@@ -46,6 +46,20 @@ def create_schema_and_tables():
         todo_date TIMESTAMP NOT NULL
         );
         '''
+        create_project_table_query = '''
+        CREATE TABLE if not exists flexboard.projects (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(255),
+        project_name TEXT NOT NULL,
+        description TEXT,
+        start_date DATE,
+        end_date DATE,
+        status VARCHAR(50), -- e.g., 'Not Started', 'In Progress', 'Completed'
+        priority VARCHAR(50), -- e.g., 'Low', 'Medium', 'High'
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        '''
+        cursor.execute(create_project_table_query)
         cursor.execute(create_todo_table_query)
         cursor.execute(create_login_table_query)
         create_login_mail_column = '''
