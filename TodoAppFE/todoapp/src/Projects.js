@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import StartProject from "./StartProject";
+import ViewProject from "./ViewProject";
 
 function Projects(props) {
     const [isProjectsAvailable, setIsProjectsAvailable] = useState(false);
     const [startProject, setStartProject] = useState(false);
+    const [viewProject, setViewProject] = useState(false);
 
     useEffect(() => {
         const checkProjectAvailability = async () => {
@@ -33,8 +35,16 @@ function Projects(props) {
         }
     }
 
+    const handleViewProject = () => {
+        setViewProject(true);
+    }
+
     if (startProject) {
         return (<StartProject userName={props.userName} />);
+    }
+
+    if(viewProject) {
+        return(<ViewProject userName={props.userName}/>);
     }
 
     return (
@@ -55,7 +65,7 @@ function Projects(props) {
                
                     <Button
                         className="pricing-btn"
-                        onClick={() => {}}
+                        onClick={handleViewProject}
                         disabled={!isProjectsAvailable}
                     >
                         Click to View Project

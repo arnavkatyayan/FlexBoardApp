@@ -4,7 +4,7 @@ from flask_mail import Mail
 from LoginUser.LoginRoute import login_blueprint
 from TodoManagement.TodoRoute import todo_blueprint
 from SignupUser.SignupRoute import signup_blueprint
-
+from ProjectManagement.ProjectRoute import project_blueprint
 app = Flask(__name__)
 CORS(app)
 
@@ -24,5 +24,6 @@ mail = Mail(app)
 app.register_blueprint(login_blueprint)
 app.register_blueprint(signup_blueprint)
 app.register_blueprint(todo_blueprint)
+app.register_blueprint(project_blueprint)
 if __name__ == '__main__':
     app.run(debug=True)
