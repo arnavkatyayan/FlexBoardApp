@@ -3,12 +3,16 @@ import React from "react";
 import {useState, useEffect} from "react";
 import { Form, Button } from "react-bootstrap";
 import Select from "react-dropdown-select";
+import swal from "sweetalert";
+import axios from "axios";
 function StartProject(props) {
 
     const [description, setDescription] = useState("");
+    const [projectName, setProjectName] = useState("");
     const [startTime, setStartTime] = useState("");
     const [deadline, setDeadline] = useState("");
     const [priority, setPriority] = useState("Low");
+    const [status, setStatus] = useState("Not Started");
 
     const handleDescription = (event) => {
         setDescription(event.target.value);
@@ -26,8 +30,35 @@ function StartProject(props) {
         setPriority(event.target.value);
     }
 
-    const handleStartProject = ()=> {
+    const handleProjectName = (event) => {
+        setProjectName(event.target.value);
+    }
 
+    const handleStatus = (event) => {
+        setStatus(event.target.value);
+    }
+
+    const handleStartProject = async ()=> {
+        const projectRequestBody = {
+            userName:props.userName,
+            description:description,
+            priority:priority,
+            startTime:startTime,
+            deadline:deadline,
+            projectName:projectName,
+            status:status
+        }
+
+        try {
+            const response = await axios.post("http://127.0.0.1:5000/saveProjectDetails", projectRequestBody);
+            if(response.data === "True") {
+                swal("Success","Project Created","success");
+            }
+        }
+        catch(error) {
+            swal("Error","Error saving the project","error");
+            console.log("Error Saving project",error);
+        }
     }
 
     const handleReset = () => {
@@ -35,6 +66,7 @@ function StartProject(props) {
         setDeadline("");
         setPriority("Low");
         setStartTime("");
+        setProjectName("");
     }
 
     return(
@@ -48,6 +80,15 @@ function StartProject(props) {
                         style={{ width: '15vw' }}
                         value={props.userName}
                         disabled={true}
+                    />
+                </Form.Group>
+                <Form.Group controlId="formUsername">
+                    <Form.Control
+                        type="text"
+                        placeholder="Project Name"
+                        style={{ width: '15vw' }}
+                        value={projectName}
+                        onChange={handleProjectName}
                     />
                 </Form.Group>
                 <Form.Group controlId="formEmail">
@@ -87,6 +128,17 @@ function StartProject(props) {
                             <option value="low">Low</option>
                             <option value="medium">Medium</option>
                             <option value="high">High</option>
+                            
+                        </Form.Select>
+                    </Form.Group>
+                    <Form.Group controlId="formPriority">
+                        <Form.Select className="project-select"
+                        value={status}
+                        onChange={handleStatus}
+                        >
+                            <option value="low">Not Started</option>
+                            <option value="medium">Started</option>
+                            <option value="high">Finished</option>
                             
                         </Form.Select>
                     </Form.Group>

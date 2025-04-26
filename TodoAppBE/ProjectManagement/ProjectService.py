@@ -32,4 +32,29 @@ def isProjectPresentService(userName):
             cursor.close()
         if connection:
             connection.close()
+
+def saveProjectDetails(userName,description,priority,startTime,deadline,status,projectName):
+    try:
+        connection = psycopg2.connect(**DB_PARAMS)
+        cursor = connection.cursor()
+
+        query = sql.SQL("""
+            INSERT INTO flexboard.projects (username, description, priority, start_date, end_date, status, project_name)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """)
+
+        cursor.execute(query, (userName, description, priority, startTime, deadline, status, projectName))
+        connection.commit()
+
+        return True
+
+    except Exception as e:
+        print(f"Error occurred while saving project details: {e}")
+        return False
+
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
         
