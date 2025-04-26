@@ -1,7 +1,7 @@
 import { type } from "@testing-library/user-event/dist/type";
 import React from "react";
 import {useState, useEffect} from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Modal } from "react-bootstrap";
 import Select from "react-dropdown-select";
 import swal from "sweetalert";
 import axios from "axios";
@@ -13,7 +13,8 @@ function StartProject(props) {
     const [deadline, setDeadline] = useState("");
     const [priority, setPriority] = useState("Low");
     const [status, setStatus] = useState("Not Started");
-
+    const [isEstimationClicked, setIsEstimateClicked] = useState(false);
+    
     const handleDescription = (event) => {
         setDescription(event.target.value);
     }
@@ -67,6 +68,11 @@ function StartProject(props) {
         setPriority("Low");
         setStartTime("");
         setProjectName("");
+        setStatus("Not Started");
+    }
+
+    const handleEstimation = async ()=> {
+
     }
 
     return(
@@ -148,6 +154,9 @@ function StartProject(props) {
                     </Button>
                     <Button variant="primary" className='btn' onClick={handleReset}>
                         Reset
+                    </Button>
+                    <Button variant="primary" className='btn' onClick={handleEstimation}>
+                        Estimate using AI
                     </Button>
                 </div>
             </Form>
