@@ -19,6 +19,27 @@ function StartProject(props) {
         setDescription(event.target.value);
     }
 
+    const handleEstimation = async () => {
+        if(description.trim().length === 0 && priority.trim().length === 0) {
+            swal("Error","Enter the description and priority for prediction","error");
+            return;
+        }
+        const estimationRequestBody = {
+            userName:props.userName,
+            description:description,
+            priority:priority
+        }
+        try {
+            const response = await axios.post("http://127.0.0.1:5000/getDaysEstimation", estimationRequestBody);
+            swal("Info", `It will take around (${response.data.estimated_days}) days to complete based on your past experiences.`, "info");
+        }
+        catch(error) {
+            swal("Error","Error fetching the estimation","error");
+            console.log("caught error while fetching");
+        }
+
+    }
+
     const handleStartTime = (event) => {
         setStartTime(event.target.value);
     }
@@ -69,10 +90,6 @@ function StartProject(props) {
         setStartTime("");
         setProjectName("");
         setStatus("Not Started");
-    }
-
-    const handleEstimation = async ()=> {
-
     }
 
     return(
@@ -155,8 +172,8 @@ function StartProject(props) {
                     <Button variant="primary" className='btn' onClick={handleReset}>
                         Reset
                     </Button>
-                    <Button variant="primary" className='btn' onClick={handleEstimation}>
-                        Estimate using AI
+                    <Button variant="primary" className='btn-ai' onClick={handleEstimation}>
+                        Estimate(AI)
                     </Button>
                 </div>
             </Form>
