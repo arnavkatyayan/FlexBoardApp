@@ -9,6 +9,23 @@ DB_PARAMS = {
     'port': '5432'
 }
 
+def changeCoinsService(username, coins):
+    try:
+        connection = psycopg2.connect(**DB_PARAMS)
+        cursor = connection.cursor()
+        query = sql.SQL("UPDATE flexboard.login SET coins = %s WHERE username = %s")
+        cursor.execute(query, (coins, username,))
+        connection.commit()
+        return True
+    except Exception as e:
+        print(f"Error found on updating coins: {e}")
+        return False
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+
 def get_coins(username):
     try:
         connection = psycopg2.connect(**DB_PARAMS)

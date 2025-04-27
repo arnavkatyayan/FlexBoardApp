@@ -40,7 +40,7 @@ function Projects(props) {
     }
 
     if (startProject) {
-        return (<StartProject userName={props.userName} />);
+        return (<StartProject userName={props.userName} coins={props.coins} setCoins={props.setCoins}  getCoinsFromBE={props.getCoinsFromBE}/>);
     }
 
     if(viewProject) {

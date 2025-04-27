@@ -91,7 +91,7 @@ function App() {
         </div>
       </div>
       {activePage === 'login' && <LoginPage coins={coins} setCoins={setCoins} setIsCoinDisplayed={setIsCoinDisplayed} setUser={setUser} />}
-      {activePage === 'signup' && <SignupPage checkEmailAvailable={checkEmailAvailable} />}
+      {activePage === 'signup' && <SignupPage checkEmailAvailable={checkEmailAvailable}/>}
       {activePage === 'pricing' && <Pricing />}
       {activePage === 'about' && <About />}
       {activePage === 'forget-password' && <ForgetPassword checkEmailAvailable={checkEmailAvailable} />}

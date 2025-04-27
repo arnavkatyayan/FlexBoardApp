@@ -91,7 +91,7 @@ const LoginPage = (props) => {
         props.setUser(userName);
         getCoinsFromBE(userName);
         return (
-            <Options coins={props.coins} userName={userName}/>
+            <Options coins={props.coins} setCoins={props.setCoins} userName={userName} getCoinsFromBE={getCoinsFromBE}/>
         )
     }
 

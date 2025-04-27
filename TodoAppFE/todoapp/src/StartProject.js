@@ -11,8 +11,8 @@ function StartProject(props) {
     const [projectName, setProjectName] = useState("");
     const [startTime, setStartTime] = useState("");
     const [deadline, setDeadline] = useState("");
-    const [priority, setPriority] = useState("Low");
-    const [status, setStatus] = useState("Not Started");
+    const [priority, setPriority] = useState("low");
+    const [status, setStatus] = useState("not started");
     const [isEstimationClicked, setIsEstimateClicked] = useState(false);
     
     const handleDescription = (event) => {
@@ -42,6 +42,15 @@ function StartProject(props) {
 
     const handleStartTime = (event) => {
         setStartTime(event.target.value);
+    }
+
+    const changeCoinsStatus = async ()=> {
+        const coinChangePayload = {
+            coins:props.coins+10,
+            userName:props.userName
+        };
+        const response = await axios.post("http://127.0.0.1:5000/changeCoins", coinChangePayload);
+        return response.data;
     }
 
     const handleDeadline = (event) => {
@@ -74,7 +83,10 @@ function StartProject(props) {
         try {
             const response = await axios.post("http://127.0.0.1:5000/saveProjectDetails", projectRequestBody);
             if(response.data === "True") {
+                changeCoinsStatus();
                 swal("Success","Project Created","success");
+                props.getCoinsFromBE(props.userName);
+               
             }
         }
         catch(error) {
@@ -82,7 +94,7 @@ function StartProject(props) {
             console.log("Error Saving project",error);
         }
     }
-
+    
     const handleReset = () => {
         setDescription("");
         setDeadline("");
@@ -159,9 +171,9 @@ function StartProject(props) {
                         value={status}
                         onChange={handleStatus}
                         >
-                            <option value="low">Not Started</option>
-                            <option value="medium">Started</option>
-                            <option value="high">Finished</option>
+                            <option value="not started">Not Started</option>
+                            <option value="started">Started</option>
+                            <option value="finished">Finished</option>
                             
                         </Form.Select>
                     </Form.Group>

@@ -22,7 +22,7 @@ function Options(props) {
     }
 
     if(isProjectBtnClicked) {
-        return (<Projects userName={props.userName}/>);
+        return (<Projects userName={props.userName} coins={props.coins} setCoins={props.setCoins} getCoinsFromBE={props.getCoinsFromBE} />);
     }
     return (
         <div className='Main-Page'>

@@ -41,7 +41,7 @@ def saveProjectDetails(userName,description,priority,startTime,deadline,status,p
 
         query = sql.SQL("""
             INSERT INTO flexboard.projects (username, description, priority, start_date, end_date, status, project_name)
-            VALUES (%s, %s, %s, %s, %s, %s)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
         """)
 
         cursor.execute(query, (userName, description, priority, startTime, deadline, status, projectName))
