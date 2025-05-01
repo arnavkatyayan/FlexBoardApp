@@ -1,6 +1,6 @@
 from flask import Flask,Blueprint,request,jsonify
 from flask_cors import CORS
-from ProjectManagement.ProjectService import isProjectPresentService,saveProjectDetails,getDaysEstimation
+from ProjectManagement.ProjectService import isProjectPresentService,saveProjectDetails,getDaysEstimation,getProjectsFromDB
 project_blueprint = Blueprint('Project', __name__)
 
 
@@ -41,3 +41,14 @@ def getEstimation():
             "success": False,
             "message": "Priority and StartTime are required!"
         }), 400  # Bad Request
+        
+@project_blueprint.route('/getProjectDetails', methods=['GET'])
+def getProjects():
+    userName = request.args.get('userName')
+    
+    if userName:
+        projects = getProjectsFromDB(userName)
+        return jsonify({
+            "projects":projects,
+            "success":False
+        })

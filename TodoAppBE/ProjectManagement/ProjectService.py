@@ -126,5 +126,30 @@ def encodePriority(priority):
         return 3
     else:
         return 1
+    
+def getProjectsFromDB(username):
+    try:
+        connection = psycopg2.connect(**DB_PARAMS)
+        cursor = connection.cursor()
+        query = sql.SQL("""SELECT project_name, description, priority, start_date, end_date, status 
+            FROM flexboard.projects 
+            WHERE username = %s """)
+        cursor.execute(query,(username,))
+        data = cursor.fetchall()
+        columns = ["project_name", "description", "priority", "start_date", "end_date", "status"]
+        result = []
+        for row in data:
+            project = dict(zip(columns,row))
+            result.append(project)
+        return result
+    except Exception as e:
+        print("found error while fetching projects")
+        return []
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+    
 
         
