@@ -419,6 +419,55 @@ padding:9px;
   width:6vw !important;
 }
 
+.project-view {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  place-items: center;
+  justify-content: center;
+  align-content: center;
+  height: 100vh; /* Full screen height */
+}
+.project-individual-css {
+  background-color: white;
+  height: 30vh; /* Same height as .info-page */
+  width: 23vw; /* Slightly smaller than info-page */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap:10px;
+  padding: 168px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.project-title {
+  font-weight: 800;
+ }
+ .btn-grps Button {
+  width: 129px;
+ }
+ .btn-grps-view-project {
+  margin-right: 10px;
+ }
+/* .project-description {
+
+}
+.project-high {
+  color: #e74c3c;
+  font-weight: 800;
+  font-size: large;
+}
+.project-medium {
+  color: #f39c12;
+  font-weight: 700;
+  font-size:x-large
+}
+.project-low {
+  color: #2ecc71;;
+  font-weight: 600;
+  font-size: large;
+} */
 
 
  
