@@ -450,24 +450,31 @@ padding:9px;
  .btn-grps-view-project {
   margin-right: 10px;
  }
-/* .project-description {
-
+.project-description {
+  font-weight: 800;
+  font-style: oblique;
 }
 .project-high {
   color: #e74c3c;
   font-weight: 800;
   font-size: large;
+  position:relative;
+  top:2px;
 }
 .project-medium {
   color: #f39c12;
   font-weight: 700;
-  font-size:x-large
+  font-size:x-large;
+  position:relative;
+  top:2px;
 }
 .project-low {
   color: #2ecc71;;
   font-weight: 600;
   font-size: large;
-} */
+  position:relative;
+  top:2px;
+}
 
 
  
