@@ -426,7 +426,23 @@ padding:9px;
   place-items: center;
   justify-content: center;
   align-content: center;
-  height: 100vh; /* Full screen height */
+  height: 100vh;
+  animation: view-project-animation 3s;
+}
+
+@keyframes view-project-animation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity:0.5
+  }
+  75% {
+    opacity:0.75
+  }
+  100% {
+    opacity:100
+  }
 }
 .project-individual-css {
   background-color: white;

@@ -8,7 +8,7 @@ import { Button } from "react-bootstrap";
 function ViewProject(props) {
     const [projects, setProjects] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [selectedProject, setSelectedProject] = useState(null); // NEW
+    const [selectedProject, setSelectedProject] = useState(null); 
 
     useEffect(() => {
         const getProjects = async () => {
@@ -23,6 +23,38 @@ function ViewProject(props) {
         };
         getProjects();
     }, []);
+
+    const getProjects = async () => {
+        try {
+            const response = await axios.get("http://127.0.0.1:5000/getProjectDetails", {
+                params: { userName: props.userName },
+            });
+            setProjects(response.data.projects);
+        } catch (error) {
+            console.log("error fetching projects");
+        }
+    };
+
+    const handleDeleteProjects = async (project) => {
+        const deleteProjectDetails = {
+            userName:props.userName,
+            projectName:project.project_name
+        };
+        try {
+            const response = await axios.post("http://127.0.0.1:5000/deleteProject",deleteProjectDetails);
+            if(response.data.success === true) {
+                swal("Success","Project Deleted","success");
+                getProjects();
+            }
+            else {
+                swal("Error","Error deleting the project","error");
+            }
+        }catch(error) {
+            swal("Error","Error deleting the project","error");
+            console.log("Error while deleting the project", error);
+        }
+
+    }
 
     const handleClose = () => {
         setShowModal(false);
@@ -42,7 +74,7 @@ function ViewProject(props) {
                     <div className="btn-grps btn-grps-view-project">
                         <Button>Open Project</Button>
                         <Button onClick={() => handleShowProject(project)}>Project Details</Button>
-                        <Button>Delete Project</Button>
+                        <Button onClick={()=> handleDeleteProjects(project)}>Delete Project</Button>
                     </div>
                 </div>
             ))}

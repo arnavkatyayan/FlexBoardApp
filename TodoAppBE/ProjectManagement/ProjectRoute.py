@@ -1,6 +1,6 @@
 from flask import Flask,Blueprint,request,jsonify
 from flask_cors import CORS
-from ProjectManagement.ProjectService import isProjectPresentService,saveProjectDetails,getDaysEstimation,getProjectsFromDB
+from ProjectManagement.ProjectService import isProjectPresentService,saveProjectDetails,getDaysEstimation,getProjectsFromDB, deleteProjectsServices, isProjectTakenService
 project_blueprint = Blueprint('Project', __name__)
 
 
@@ -31,7 +31,6 @@ def getEstimation():
     userName = request.json.get('userName')
     if priority and description and userName:
         getDays = getDaysEstimation(priority,description,userName)
-          # ✅ Correct way to return JSON
         return jsonify({
             "success": True,
             "estimated_days": getDays
@@ -40,7 +39,7 @@ def getEstimation():
         return jsonify({
             "success": False,
             "message": "Priority and StartTime are required!"
-        }), 400  # Bad Request
+        }), 400 
         
 @project_blueprint.route('/getProjectDetails', methods=['GET'])
 def getProjects():
@@ -52,3 +51,34 @@ def getProjects():
             "projects":projects,
             "success":False
         })
+        
+@project_blueprint.route('/deleteProject', methods=['POST'])
+def deleteProject():
+    userName = request.json.get('userName')
+    projectName = request.json.get('projectName')
+    if userName and projectName:
+        isDeleted = deleteProjectsServices(userName,projectName)
+        if isDeleted:
+           return jsonify({
+               "success":True
+           })
+        else:
+            return jsonify({
+                "success":False
+            })
+            
+@project_blueprint.route('/isProjectPresent', methods=['GET'])
+def isProjectTaken():
+    userName = request.args.get('userName')
+    projectName = request.args.get('projectName')
+    if userName and projectName:
+        isProject = isProjectTakenService(userName,projectName)
+        if isProject:
+            return jsonify({
+                "data":True
+            })
+        else:
+            return jsonify({
+                "data":False
+            })
+                

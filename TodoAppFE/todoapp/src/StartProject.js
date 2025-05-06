@@ -69,7 +69,32 @@ function StartProject(props) {
         setStatus(event.target.value);
     }
 
+    const isProjectPresent = async () => {
+        try {
+            const response = await axios.get("http://127.0.0.1:5000/isProjectPresent" , {
+                params: {
+                    userName:props.userName,
+                    projectName:projectName
+                }
+            });
+            if(response.data.data === true) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch(error) {
+            console.log("error fetching details",error);
+        }
+    }
+
     const handleStartProject = async ()=> {
+        if(await isProjectPresent()) {
+            swal("Error","The project name is already taken!","error");
+            return;
+        }
+        
         const projectRequestBody = {
             userName:props.userName,
             description:description,

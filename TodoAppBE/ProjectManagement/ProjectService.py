@@ -150,6 +150,46 @@ def getProjectsFromDB(username):
             cursor.close()
         if connection:
             connection.close()
+
+def deleteProjectsServices(userName,projectName):
+    try:
+        connection = psycopg2.connect(**DB_PARAMS)
+        cursor = connection.cursor()
+        query = sql.SQL("""DELETE FROM flexboard.projects WHERE username = %s AND project_name = %s""")
+        cursor.execute(query,(userName,projectName))
+        connection.commit()
+        print("Project Deleted successfully!")
+        return True
+    
+    except Exception as e:
+        print("Getting error in deleting the row",e)
+        return False
+    
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+            
+def isProjectTakenService(userName,projectName):
+    try:
+        connection = psycopg2.connect(**DB_PARAMS)
+        cursor = connection.cursor()
+        query = sql.SQL("""SELECT project_name, username FROM flexboard.projects WHERE project_name = %s AND username = %s""")
+        cursor.execute(query,(projectName,userName))
+        row = cursor.fetchone()
+        if row:
+            return True
+        else:
+            return False
+    except Exception as e:
+        print("Getting error while fetching projects")
+        return False
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
     
 
         
