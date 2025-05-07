@@ -426,8 +426,9 @@ padding:9px;
   place-items: center;
   justify-content: center;
   align-content: center;
-  height: 100vh;
+  height: 145vh;
   animation: view-project-animation 3s;
+  overflow: auto;
 }
 
 @keyframes view-project-animation {
