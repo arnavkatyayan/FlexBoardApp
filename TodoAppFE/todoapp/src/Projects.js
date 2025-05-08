@@ -44,7 +44,7 @@ function Projects(props) {
     }
 
     if(viewProject) {
-        return(<ViewProject userName={props.userName}/>);
+        return(<ViewProject userName={props.userName} setViewProject={setViewProject}/>);
     }
 
     return (
@@ -67,6 +67,7 @@ function Projects(props) {
                         className="pricing-btn"
                         onClick={handleViewProject}
                         disabled={!isProjectsAvailable}
+                        title={!isProjectsAvailable ? "No projects available" : "click to view projects"}
                     >
                         Click to View Project
                     </Button>
@@ -88,6 +89,7 @@ function Projects(props) {
                 <Button
                     className="pricing-btn"
                     onClick={handleStartProject}
+                    title="click to start your project"
                 >
                     Click To Start Project
                 </Button>
