@@ -4,6 +4,9 @@ import axios from "axios";
 import swal from "sweetalert";
 import { ReusableModalViewProject } from "./ReusableModals&Methods";
 import { Button } from "react-bootstrap";
+import Open from './openProject.png';
+import Delete from './deleteProject.png';
+import Details from './detailsProject.png';
 
 function ViewProject(props) {
     const [projects, setProjects] = useState([]);
@@ -72,9 +75,9 @@ function ViewProject(props) {
                 <div className="project-individual-css" key={index}>
                     <div className="project-title">{project.project_name}</div>
                     <div className="btn-grps btn-grps-view-project">
-                        <Button>Open Project</Button>
-                        <Button onClick={() => handleShowProject(project)}>Project Details</Button>
-                        <Button onClick={()=> handleDeleteProjects(project)}>Delete Project</Button>
+                       <img src={Open} title="Open Project" className="view-project-icons"/>
+                       <img src={Details} title="Project Details" className="view-project-icons details-icon" onClick={() => handleShowProject(project)}/>
+                       <img src={Delete} title="Delete Project" className="view-project-icons" onClick={()=> handleDeleteProjects(project)}/>
                     </div>
                 </div>
             ))}

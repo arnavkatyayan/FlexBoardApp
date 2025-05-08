@@ -492,6 +492,14 @@ padding:9px;
   position:relative;
   top:2px;
 }
+.view-project-icons {
+  height:50px;
+  cursor: pointer;
+}
+.details-icon {
+  height: 70px !important;
+  margin-top: -7px;
+}
 
 
  
