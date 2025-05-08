@@ -5,6 +5,7 @@ import { Form, Button, Modal } from "react-bootstrap";
 import Select from "react-dropdown-select";
 import swal from "sweetalert";
 import axios from "axios";
+import { max_chars, min_chars } from "./ReusableModals&Methods";
 function StartProject(props) {
 
     const [description, setDescription] = useState("");
@@ -92,6 +93,16 @@ function StartProject(props) {
     const handleStartProject = async ()=> {
         if(await isProjectPresent()) {
             swal("Error","The project name is already taken!","error");
+            return;
+        }
+
+        if(projectName.trim().length <min_chars || projectName.trim().length>max_chars) {
+            swal("Error","The length for project name should be between 3 to 50","error");
+            return;
+        }
+
+        if(description.length>500) {
+            swal("Error","The description length is 500!","error");
             return;
         }
         

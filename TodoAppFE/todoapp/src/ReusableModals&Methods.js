@@ -1,6 +1,8 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
+var max_chars = 50;
+var min_chars = 3;
 
 export const ReusableModalViewProject = ({ showModal, handleClose, project }) => {
 
@@ -28,3 +30,4 @@ export const ReusableModalViewProject = ({ showModal, handleClose, project }) =>
         </Modal>
     );
 };
+export {max_chars, min_chars}
