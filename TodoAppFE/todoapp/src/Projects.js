@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import StartProject from "./StartProject";
 import ViewProject from "./ViewProject";
+import swal from "sweetalert";
 
 function Projects(props) {
     const [isProjectsAvailable, setIsProjectsAvailable] = useState(false);
@@ -17,6 +18,18 @@ function Projects(props) {
 
         checkProjectAvailability();
     }, []);
+
+    useEffect(() => {
+        if(startProject === false) {
+        const checkProjectAvailability = async () => {
+            const isPresent = await isProjectPresent();
+            setIsProjectsAvailable(isPresent);
+        };
+
+        checkProjectAvailability();
+    }
+    
+    }, [startProject]);
 
     const handleStartProject = () => {
         setStartProject(true);
@@ -35,12 +48,20 @@ function Projects(props) {
         }
     }
 
-    const handleViewProject = () => {
-        setViewProject(true);
+    const handleViewProject = async () => {
+        const isPresent = await isProjectPresent();
+
+        if (isPresent) {
+            swal("Error", "No Projects Available", "error");
+            return;
+        }
+        else {
+            setViewProject(true);
+        }
     }
 
     if (startProject) {
-        return (<StartProject userName={props.userName} coins={props.coins} setCoins={props.setCoins}  getCoinsFromBE={props.getCoinsFromBE}/>);
+        return (<StartProject userName={props.userName} coins={props.coins} setCoins={props.setCoins}  getCoinsFromBE={props.getCoinsFromBE} setStartProject={setStartProject}/>);
     }
 
     if(viewProject) {

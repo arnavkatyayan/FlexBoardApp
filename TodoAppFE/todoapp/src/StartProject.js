@@ -122,7 +122,7 @@ function StartProject(props) {
                 changeCoinsStatus();
                 swal("Success","Project Created","success");
                 props.getCoinsFromBE(props.userName);
-               
+                props.setStartProject(false);
             }
         }
         catch(error) {
